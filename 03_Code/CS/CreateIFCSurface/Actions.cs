@@ -22,17 +22,19 @@ namespace CreateIFCSurface
 			//Добавили информацию о сдвижке координат
 			string InfoAboutLocation = null;
 			string InfoAboutAngle = null;
+			InfoAboutLocation = $"#43= IFCCARTESIANPOINT((0.,0.,0.));";
+			InfoAboutAngle = $"#45= IFCDIRECTION((1.,0.,0.));";
 
-			if (ReCalc == true)
-			{
-				InfoAboutLocation = $"#43= IFCCARTESIANPOINT((0.,0.,0.));";
-				InfoAboutAngle = $"#45= IFCDIRECTION((1.,0.,0.));";
-			}
-			else
-			{
-				InfoAboutLocation = $"#43= IFCCARTESIANPOINT(({CoordTransform[1]},{CoordTransform[0]},{CoordTransform[2]}));";
-				InfoAboutAngle = $"#45= IFCDIRECTION(({Math.Cos(CoordTransform[3])},{-Math.Sin(CoordTransform[3])},0.));";
-			}
+			//if (ReCalc == true)
+			//{
+			//	InfoAboutLocation = $"#43= IFCCARTESIANPOINT((0.,0.,0.));";
+			//	InfoAboutAngle = $"#45= IFCDIRECTION((1.,0.,0.));";
+			//}
+			//else
+			//{
+			//	InfoAboutLocation = $"#43= IFCCARTESIANPOINT(({CoordTransform[1]},{CoordTransform[0]},{CoordTransform[2]}));";
+			//	InfoAboutAngle = $"#45= IFCDIRECTION(({Math.Cos(CoordTransform[3])},{-Math.Sin(CoordTransform[3])},0.));";
+			//}
 
 			//string InfoAboutLocation = $"#43= IFCCARTESIANPOINT((0.,0.,0.));";
 			File.AppendAllText(IFC_FilePath, InfoAboutLocation + Environment.NewLine);
@@ -45,12 +47,12 @@ namespace CreateIFCSurface
 			List<string> PointsNumbers = new List<string>();
 			
 			
-			long NumMax = 0;
+			long NumMax = 0; //Переменная для установления максимального номера точки (для счетчика строк #...=)
 			//Метод добавления в файл IFC информации о точке по её номеру (из атрибута id в файле LandXML)
 			void AddInfoAboutPoint (string PointNum)
 			{
 				PointsNumbers.Add(PointNum);
-				char K = '"';
+				char K = '"'; //Символ кавычки в параметре id
 				
 				XElement OnePoint = Pnts.Elements().Where(a => a.Attribute("id").Value.Replace(K.ToString(), string.Empty) == PointNum).First();
 				string[] PointCoordinates = OnePoint.Value.Split(' ');
@@ -58,7 +60,7 @@ namespace CreateIFCSurface
 				if (ReCalc == true)
 				{
 					ωz = CoordTransform[3];
-					//Пересчет матрицы
+					//Элементы матрицы поворота Р
 					double a11 = Math.Cos(ωz);
 					double a12 = Math.Sin(ωz);
 					double a13 = 0d;
@@ -68,7 +70,7 @@ namespace CreateIFCSurface
 					double a31 = 0d;
 					double a32 = 0d;
 					double a33 = 1d;
-					//Члены для матрицы вбивать по колонкам !!!!!!!!!!! 
+					//Уравнение трансформации координат
 					var P = CreateMatrix.Dense(3, 3, new double[] { a11, a21, a31, a12, a22, a32, a13, a23, a33 });
 					var OldCoords = CreateMatrix.Dense(3, 1, new double[] { Convert.ToDouble(PointCoordinates[1]), Convert.ToDouble(PointCoordinates[0]), Convert.ToDouble(PointCoordinates[2]) });
 					var OffsetCoords = CreateMatrix.Dense(3, 1, new double[] {  CoordTransform[0]/1000d, CoordTransform[1]/1000d, CoordTransform[2]/1000d });
@@ -81,6 +83,7 @@ namespace CreateIFCSurface
 					(NewCoords[1][0] * 1000).ToString() + "," +
 					(NewCoords[2][0] * 1000).ToString();
 				}
+				//Пока исполтзуется только для прямого пересчета координат
 				else NewPointCoord =
 					(Convert.ToDouble(PointCoordinates[0]) * 1000).ToString() + "," +
 					(Convert.ToDouble(PointCoordinates[1]) * 1000).ToString() + "," +
@@ -168,11 +171,11 @@ namespace CreateIFCSurface
 				if (Z_Coord < ZMin) ZMin = Z_Coord;
 			}
 
-			double[] Offset = new double[4] { (XMax + XMin) * 500, (YMax + YMin) * 500, (ZMax + ZMin) * 500, 0d };
+			double[] Offset = new double[4] { -(XMax + XMin) * 500, -(YMax + YMin) * 500, -(ZMax + ZMin) * 500, 0d };
 			//double[] Offset = new double[3] { XMax*1000 + ((XMax - XMin) * 500), YMax * 1000 + ((YMax - YMin) * 500), ZMax * 1000 + ((ZMax - ZMin) * 500) };
 			//MainWindow.Log.Append("Параметры сдвижки были приняты:" + Environment.NewLine + XMax + "," + XMin + "," + YMax + "," + YMin + "," + ZMax + "," + ZMin);
 			//double[] Offset = new double[3] { XMax*1000, YMax * 1000, ZMax * 1000,};
-			ConvertOpeation(MainWindow.PathToLandXMLFile, MainWindow.PathToIFCSaving, Offset, false);
+			ConvertOpeation(MainWindow.PathToLandXMLFile, MainWindow.PathToIFCSaving, Offset, true);
 
 		}
 		//Элементы трансформации и вспомогательные переменные
