@@ -46,7 +46,7 @@ namespace CreateIFCSurface
 			//Проверка файловых путей и опции выбора параметров преобразования
 			//if (RB_1.IsChecked == false && RB_2.IsChecked == false && RB_1.IsChecked == false) MessageBox.Show("Не выбрана опция обработки файла");
 			//if (!File.Exists(PathToLandXMLFile)) { MessageBox.Show("Файл LandXML не был выбран или путь недействительный"); PathToLandXMLFile = null; }
-			PathToLandXMLFile = @"D:\Programming\GitRepo\LandXML-to-IFC\02_Resources\K13-395_Surface.xml";
+			PathToLandXMLFile = @"D:\Programming\GitRepo\LandXML-to-IFC\02_Resources\L15_500_Surface.xml";
 			if (RB_1.IsChecked == true) Actions.ConvertOpeation(PathToLandXMLFile, PathToIFCSaving, new double[4] { 0d, 0d, 0d, 0d },false);
 			else if (RB_2.IsChecked == true) Actions.CheckFileLocation(PathToLandXMLFile);
 			else if (RB_3.IsChecked == true)
@@ -58,12 +58,12 @@ namespace CreateIFCSurface
 				//Data[3] = F_Point1.Text;
 				//Data[4] = F_Point2.Text;
 				//Data[5] = F_Point3.Text;
-				Data[0] = "2215508.8808,529936.4688,150";
-				Data[1] = "2215512.0551,529949.3433,150";
-				Data[2] = "2215543.9861,529939.9254,150";
-				Data[3] = "34.2268,12.7303,0";
-				Data[4] = "34.227,-0.5296,0";
-				Data[5] = "0.9699,0.9701,0";
+				Data[0] = "2216582.1221,530008.5171,136";
+				Data[1] = "2216565.5541,530052.8739,136";
+				Data[2] = "2216547.802,530046.2432,136";
+				Data[3] = "-8.282,2.125,0";
+				Data[4] = "39.068,2.125,0";
+				Data[5] = "39.068,21.075,0";
 				Actions.FindParameters(Data);
 			}
 			Log.Append(Environment.NewLine + "End!");
