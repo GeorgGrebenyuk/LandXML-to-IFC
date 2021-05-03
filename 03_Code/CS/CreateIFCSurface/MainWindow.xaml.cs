@@ -25,13 +25,10 @@ namespace CreateIFCSurface
 		public MainWindow()
 		{
 			InitializeComponent();
-			RB_3.IsEnabled = false;
-			TB_Point1.IsEnabled = false;
-			TB_Point2.IsEnabled = false;
-			TB_Point3.IsEnabled = false;
 		}
 		public static string PathToLandXMLFile = null;
 		public static string PathToIFCSaving = null;
+		public static StringBuilder Log = new StringBuilder();
 
 		private void Button_Click(object sender, RoutedEventArgs e) //Выбор файла LandXML
 		{
@@ -50,9 +47,27 @@ namespace CreateIFCSurface
 			//if (RB_1.IsChecked == false && RB_2.IsChecked == false && RB_1.IsChecked == false) MessageBox.Show("Не выбрана опция обработки файла");
 			//if (!File.Exists(PathToLandXMLFile)) { MessageBox.Show("Файл LandXML не был выбран или путь недействительный"); PathToLandXMLFile = null; }
 			PathToLandXMLFile = @"D:\Programming\GitRepo\LandXML-to-IFC\02_Resources\K13-395_Surface.xml";
-			if (RB_1.IsChecked == true) Actions.ConvertOpeation(PathToLandXMLFile, PathToIFCSaving, new double[3] { 0d, 0d, 0d });
+			if (RB_1.IsChecked == true) Actions.ConvertOpeation(PathToLandXMLFile, PathToIFCSaving, new double[4] { 0d, 0d, 0d, 0d },false);
 			else if (RB_2.IsChecked == true) Actions.CheckFileLocation(PathToLandXMLFile);
-			ConsoleApp.Text = "End!";
+			else if (RB_3.IsChecked == true)
+			{
+				string[] Data = new string[6];
+				//Data[0] = C_Point1.Text;
+				//Data[1] = C_Point2.Text;
+				//Data[2] = C_Point3.Text;
+				//Data[3] = F_Point1.Text;
+				//Data[4] = F_Point2.Text;
+				//Data[5] = F_Point3.Text;
+				Data[0] = "2215508.8808,529936.4688,150";
+				Data[1] = "2215512.0551,529949.3433,150";
+				Data[2] = "2215543.9861,529939.9254,150";
+				Data[3] = "34.2268,12.7303,0";
+				Data[4] = "34.227,-0.5296,0";
+				Data[5] = "0.9699,0.9701,0";
+				Actions.FindParameters(Data);
+			}
+			Log.Append(Environment.NewLine + "End!");
+			ConsoleApp.Text = Log.ToString();
 		}
 
 		private void TB_XField_TextChanged(object sender, TextChangedEventArgs e) //Поле координаты X
@@ -87,6 +102,21 @@ namespace CreateIFCSurface
 		}
 
 		private void RadioButton_Checked_2(object sender, RoutedEventArgs e) //Задавать сдвижку по рассчитанным значениям
+		{
+
+		}
+
+		private void F_Point1_TextChanged(object sender, TextChangedEventArgs e) //F_Point1
+		{
+
+		}
+
+		private void F_Point2_TextChanged(object sender, TextChangedEventArgs e) //F_Point2
+		{
+
+		}
+
+		private void F_Point3_TextChanged(object sender, TextChangedEventArgs e) //F_Point3
 		{
 
 		}
