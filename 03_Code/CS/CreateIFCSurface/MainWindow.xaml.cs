@@ -57,7 +57,7 @@ namespace CreateIFCSurface
 			//Проверка файловых путей и опции выбора параметров преобразования
 			if (RB_1.IsChecked == false && RB_2.IsChecked == false && RB_1.IsChecked == false) MessageBox.Show("Не выбрана опция обработки файла");
 			if (!File.Exists(PathToLandXMLFile)) { MessageBox.Show("Файл LandXML не был выбран или путь недействительный"); PathToLandXMLFile = null; }
-			PathToLandXMLFile = @"D:\Programming\GitRepo\LandXML-to-IFC\02_Resources\L15_500_Surface.xml";
+			//PathToLandXMLFile = @"D:\Programming\GitRepo\LandXML-to-IFC\02_Resources\L15_500_Surface.xml";
 			if (RB_1.IsChecked == true) Actions.ConvertOpeation(PathToLandXMLFile, new double[4] { 0d, 0d, 0d, 0d },false);
 			else if (RB_2.IsChecked == true) Actions.CheckFileLocation(PathToLandXMLFile);
 			else if (RB_3.IsChecked == true)
