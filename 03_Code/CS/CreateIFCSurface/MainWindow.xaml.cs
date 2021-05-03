@@ -25,14 +25,15 @@ namespace CreateIFCSurface
 		public MainWindow()
 		{
 			InitializeComponent();
+			RB_1.IsEnabled = false;
 
-			//Сугубо для отладки/тестирования
-			C_Point1.Text = "2216582.1221,530008.5171,136";
-			C_Point2.Text = "2216565.5541,530052.8739,136";
-			C_Point3.Text = "2216547.802,530046.2432,136";
-			F_Point1.Text = "-8.282,2.125,0";
-			F_Point2.Text = "39.068,2.125,0";
-			F_Point3.Text = "39.068,21.075,0";
+			////Сугубо для отладки/тестирования
+			//C_Point1.Text = "2216582.1221,530008.5171,136";
+			//C_Point2.Text = "2216565.5541,530052.8739,136";
+			//C_Point3.Text = "2216547.802,530046.2432,136";
+			//F_Point1.Text = "-8.282,2.125,0";
+			//F_Point2.Text = "39.068,2.125,0";
+			//F_Point3.Text = "39.068,21.075,0";
 		}
 		public static string PathToLandXMLFile = null;
 
@@ -73,7 +74,7 @@ namespace CreateIFCSurface
 
 				Actions.FindParameters(Data);
 			}
-			Log.Append(Environment.NewLine + "End!");
+			Log.Append("End!");
 			ConsoleApp.Text = Log.ToString();
 		}
 

@@ -355,7 +355,7 @@ namespace CreateIFCSurface
 			error = Math.Round(error, 9);
 
 			double[] Offset = new double[4] { ΔX * 1000, ΔY * 1000, ΔZ * 1000, ωz};
-			MainWindow.Log.Append(error);
+			MainWindow.Log.Append("Линейная ошибка" + error + "метров");
 			ConvertOpeation(MainWindow.PathToLandXMLFile, Offset,true);
 
 		}
