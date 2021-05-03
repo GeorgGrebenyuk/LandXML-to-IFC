@@ -7,18 +7,33 @@ using System.Xml;
 using System.Xml.Linq;
 using System.IO;
 using MathNet.Numerics.LinearAlgebra;
+using System.Reflection;
 
 
 namespace CreateIFCSurface
 {
 	public static class Actions
 	{
-		public static void ConvertOpeation (string PathToSourceFile, string PathToFinishFile, double [] CoordTransform, bool ReCalc)
+		private static void CreateFileFromTemplate (string PathToFinishFile)
+		{
+			var assembly = Assembly.GetExecutingAssembly();
+			using (Stream stream = assembly.GetManifestResourceStream("CreateIFCSurface.Data.Template.ifc"))
+
+			using (StreamReader reader = new StreamReader(stream))
+			{
+				File.AppendAllText (PathToFinishFile,reader.ReadToEnd());
+			}
+		}
+		public static void ConvertOpeation (string PathToSourceFile, double [] CoordTransform, bool ReCalc)
 		{
 			string guid = Guid.NewGuid().ToString();
-			string IFC_FilePath = $@"C:\Users\GeorgKeneberg\Documents\Temp\Test-{guid}.ifc";
-			//Скопировали файл шаблона для последующего заполнения
-			File.Copy(@"D:\Programming\GitRepo\LandXML-to-IFC\02_Resources\ЦММ_Шаблон.ifc", IFC_FilePath);
+			string SourceDir = Path.GetDirectoryName(PathToSourceFile);
+			
+			string IFC_FilePath = SourceDir + $"\\Converted-{guid}.ifc";
+			//Создали болванку файла IFC из ресурсов проекта
+			CreateFileFromTemplate(IFC_FilePath);
+			//Скопировали файл шаблона для последующего заполнения - для отладки
+			//File.Copy(@"D:\Programming\GitRepo\LandXML-to-IFC\02_Resources\ЦММ_Шаблон.ifc", IFC_FilePath);
 			//Добавили информацию о сдвижке координат
 			string InfoAboutLocation = null;
 			string InfoAboutAngle = null;
@@ -47,7 +62,7 @@ namespace CreateIFCSurface
 			List<string> PointsNumbers = new List<string>();
 			
 			
-			long NumMax = 0; //Переменная для установления максимального номера точки (для счетчика строк #...=)
+			long NumMax = 0; //Переменная для установления максимального номера точки (участвует в формировании номеров строк IFC)
 			//Метод добавления в файл IFC информации о точке по её номеру (из атрибута id в файле LandXML)
 			void AddInfoAboutPoint (string PointNum)
 			{
@@ -175,7 +190,7 @@ namespace CreateIFCSurface
 			//double[] Offset = new double[3] { XMax*1000 + ((XMax - XMin) * 500), YMax * 1000 + ((YMax - YMin) * 500), ZMax * 1000 + ((ZMax - ZMin) * 500) };
 			//MainWindow.Log.Append("Параметры сдвижки были приняты:" + Environment.NewLine + XMax + "," + XMin + "," + YMax + "," + YMin + "," + ZMax + "," + ZMin);
 			//double[] Offset = new double[3] { XMax*1000, YMax * 1000, ZMax * 1000,};
-			ConvertOpeation(MainWindow.PathToLandXMLFile, MainWindow.PathToIFCSaving, Offset, true);
+			ConvertOpeation(MainWindow.PathToLandXMLFile, Offset, true);
 
 		}
 		//Элементы трансформации и вспомогательные переменные
@@ -341,7 +356,7 @@ namespace CreateIFCSurface
 
 			double[] Offset = new double[4] { ΔX * 1000, ΔY * 1000, ΔZ * 1000, ωz};
 			MainWindow.Log.Append(error);
-			ConvertOpeation(MainWindow.PathToLandXMLFile, MainWindow.PathToIFCSaving, Offset,true);
+			ConvertOpeation(MainWindow.PathToLandXMLFile, Offset,true);
 
 		}
 	}
