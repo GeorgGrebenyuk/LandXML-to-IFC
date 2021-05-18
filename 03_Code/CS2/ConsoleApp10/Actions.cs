@@ -34,10 +34,10 @@ namespace ConsoleApp10
 	{
 		public static void Act1 ()
 		{
-			string MagiCadAD_File = @"C:\Users\GeorgKeneberg\Downloads\MagiCAD_for_AutoCAD_4.ifc";
+			//string MagiCadAD_File = @"C:\Users\GeorgKeneberg\Downloads\MagiCAD_for_AutoCAD_4.ifc";
 			string guid = Guid.NewGuid().ToString();
-			string PathToSave = $@"C:\Users\GeorgKeneberg\Documents\Temp\File-{guid}.ifc";
-			string PathToSourceFile = @"C:\Users\GeorgKeneberg\Documents\Temp\Красная1.xml";
+			string PathToSave = $@"E:\Work\Temp\Temp\File-{guid}.ifc";
+			string PathToSourceFile = @"E:\Work\Temp\Temp\Красная1.xml";
 
 			var editor = new XbimEditorCredentials
 			{
@@ -74,6 +74,8 @@ namespace ConsoleApp10
 					//IFCBUILDINGSTOREY
 					var myStorey = model.Instances.New<IfcBuildingStorey>();
 					IFCBUILDINGSTOREY_El = myStorey.EntityLabel;
+					//Площадка
+					var myPlacement = model.Instances.New<IfcLocalPlacement>(a=>a.PlacementRelTo = );
 					//Заканчиваем вносить изменения
 					txn.Commit();
 				}
@@ -183,11 +185,11 @@ namespace ConsoleApp10
 					}
 
 					
-					string IFCPOLYLOOP = $"#{LastNum + Counter}= IFCPOLYLOOP((#{NewPointsNums[0]},#{NewPointsNums[1]},#{NewPointsNums[2]}));";
+					string IFCPOLYLOOP = $"#{LastNum + Counter}=IFCPOLYLOOP((#{NewPointsNums[0]},#{NewPointsNums[1]},#{NewPointsNums[2]}));";
 					sw.WriteLine(IFCPOLYLOOP);
-					string IFCFACEOUTERBOUND = $"#{LastNum + Counter + 1}= IFCFACEOUTERBOUND(#{LastNum + Counter},.T.);";
+					string IFCFACEOUTERBOUND = $"#{LastNum + Counter + 1}=IFCFACEOUTERBOUND(#{LastNum + Counter},.T.);";
 					sw.WriteLine(IFCFACEOUTERBOUND);
-					string IFCFACE = $"#{LastNum + Counter + 2}= IFCFACE((#{LastNum + Counter + 1}));";
+					string IFCFACE = $"#{LastNum + Counter + 2}=IFCFACE((#{LastNum + Counter + 1}));";
 					sw.WriteLine(IFCFACE);
 
 					if (IFCOPENSHELL == null) IFCOPENSHELL += $"#{LastNum + Counter + 2}";
