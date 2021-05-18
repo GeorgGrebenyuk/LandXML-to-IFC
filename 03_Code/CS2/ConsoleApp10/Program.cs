@@ -12,7 +12,7 @@ namespace ConsoleApp10
 		{
 			Actions.Act1();
 			Console.WriteLine("End");
-			Console.ReadKey();
+			//Console.ReadKey();
 		}
 	}
 }
