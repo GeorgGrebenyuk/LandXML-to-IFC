@@ -25,7 +25,7 @@ namespace CreateIFCSurface
 		public MainWindow()
 		{
 			InitializeComponent();
-			RB_1.IsEnabled = false;
+			//RB_1.IsEnabled = false;
 
 			////Сугубо для отладки/тестирования
 			//C_Point1.Text = "2216582.1221,530008.5171,136";
@@ -58,7 +58,7 @@ namespace CreateIFCSurface
 			if (RB_1.IsChecked == false && RB_2.IsChecked == false && RB_1.IsChecked == false) MessageBox.Show("Не выбрана опция обработки файла");
 			if (!File.Exists(PathToLandXMLFile)) { MessageBox.Show("Файл LandXML не был выбран или путь недействительный"); PathToLandXMLFile = null; }
 			//PathToLandXMLFile = @"D:\Programming\GitRepo\LandXML-to-IFC\02_Resources\L15_500_Surface.xml";
-			if (RB_1.IsChecked == true) Actions.ConvertOpeation(PathToLandXMLFile, new double[4] { 0d, 0d, 0d, 0d },false);
+			if (RB_1.IsChecked == true) Actions.FindParameters(new string[6] {"1000,1000,0", "2000,1000,0", "1500,2000,0", "1000,1000,0", "2000,1000,0", "1500,2000,0" }); //Actions.ConvertOpeation(PathToLandXMLFile, new double[4] { 0d, 0d, 0d, 0d },false);
 			else if (RB_2.IsChecked == true) Actions.CheckFileLocation(PathToLandXMLFile);
 			else if (RB_3.IsChecked == true)
 			{
