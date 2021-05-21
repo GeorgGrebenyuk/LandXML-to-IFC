@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<LandXML xmlns="http://www.landxml.org/schema/LandXML-1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.landxml.org/schema/LandXML-1.2 http://www.landxml.org/schema/LandXML-1.2/LandXML-1.2.xsd" date="2021-05-20" time="15:53:57" version="1.2" language="English" readOnly="false">
+	<Units>
+		<Metric areaUnit="squareMeter" linearUnit="meter" volumeUnit="cubicMeter" temperatureUnit="celsius" pressureUnit="milliBars" diameterUnit="millimeter" angularUnit="decimal degrees" directionUnit="decimal degrees"></Metric>
+	</Units>
+	<Project name="E:\Work\Code\GitHub\LandXML-to-IFC\01_SampleFiles\ТопоПростая.dwg"></Project>
+	<Application name="Autodesk Civil 3D" desc="Civil 3D" manufacturer="Autodesk, Inc." version="2021" manufacturerURL="www.autodesk.com/civil" timeStamp="2021-05-20T15:53:57"></Application>
+	<Surfaces>
+		<Surface name="1" desc="Описание">
+			<SourceData>
+				<Breaklines>
+					<Breakline brkType="standard" desc="Структурная линия установлена1">
+						<PntList3D>79.082664402616 4.842978170929 0. 79.082664402616 44.365336203767 0. 42.541673447832 44.365336203767 0. 42.541673447832 4.842978170929 0. 79.082664402616 4.842978170929 0.</PntList3D>
+						<Feature code="BreakLine" source="Autodesk Civil 3D">
+							<Property label="weedDistance" value="0.000000"></Property>
+							<Property label="weedAngle" value="0.000000"></Property>
+							<Property label="supplementDistance" value="0.000000"></Property>
+							<Property label="minOrdinateDistance" value="1.000000"></Property>
+						</Feature>
+					</Breakline>
+				</Breaklines>
+			</SourceData>
+			<Definition surfType="TIN" area2DSurf="1444.186127389659" area3DSurf="1492.006415810798" elevMax="4." elevMin="0.">
+				<Pnts>
+					<P id="5">79.082664402616 4.842978170929 0.</P>
+					<P id="6">79.082664402616 44.365336203767 0.</P>
+					<P id="7">42.541673447832 44.365336203767 0.</P>
+					<P id="8">42.541673447832 4.842978170929 0.</P>
+					<P id="9">60.451822795336 29.210909939985 1.</P>
+					<P id="10">50.527145980701 12.860015941571 4.</P>
+					<P id="11">70.960303497754 15.779818936352 2.</P>
+				</Pnts>
+				<Faces>
+					<F n="3 2 8">11 5 10</F>
+					<F n="1 0 7">10 5 8</F>
+					<F n="5 0 1">11 6 5</F>
+					<F n="6 0 5">9 7 6</F>
+					<F n="8 4 3">11 9 6</F>
+					<F n="7 4 8">10 7 9</F>
+					<F n="2 0 6">10 8 7</F>
+					<F n="1 6 5">11 10 9</F>
+				</Faces>
+			</Definition>
+		</Surface>
+	</Surfaces>
+</LandXML>
