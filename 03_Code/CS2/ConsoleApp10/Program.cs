@@ -10,7 +10,12 @@ namespace ConsoleApp10
 	{
 		static void Main(string[] args)
 		{
-			Actions.Act1();
+			Actions2.CreateBasicIfc_File();
+			Actions2.AddPointsToIfc();
+			Actions2.AddFacesToIfc();
+			Actions2.AddStyleToSurface();
+			Actions2.AddSurfaceToIfcSite();
+
 			Console.WriteLine("End");
 			//Console.ReadKey();
 		}

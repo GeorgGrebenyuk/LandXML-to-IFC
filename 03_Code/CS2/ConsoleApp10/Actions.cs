@@ -75,7 +75,7 @@ namespace ConsoleApp10
 					var myStorey = model.Instances.New<IfcBuildingStorey>();
 					IFCBUILDINGSTOREY_El = myStorey.EntityLabel;
 					//Площадка
-					var myPlacement = model.Instances.New<IfcLocalPlacement>(a=>a.PlacementRelTo = );
+					//var myPlacement = model.Instances.New<IfcLocalPlacement>(a=>a.PlacementRelTo = );
 					//Заканчиваем вносить изменения
 					txn.Commit();
 				}
